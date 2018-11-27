@@ -12,6 +12,10 @@
 
 ### IntelliJ IDEA ###
 .idea
+.mvn
+log
+.gitattributes
+.gitignore
 *.iws
 *.iml
 *.ipr
