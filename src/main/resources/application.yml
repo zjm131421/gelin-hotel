@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: gelin-hotel
+  thymeleaf:
+    prefix: classpath:/templates/
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/hotel?characterEncoding=utf8&useSSL=true&serverTimezone=UTC
+    username: root
+    password: mkt2China
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      data-source-properties:
+        cachePrepStmt: false
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+      maximum-pool-size: 10
+      minimum-idle: 2
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.gelin.hotel.entity
+
+server:
+  port: 8888
+
+web:
+  ignore:
+    uri:
+  loginsuccess:
+    uri:
+
+
