@@ -3,8 +3,9 @@ package com.gelin.hotel.mapper;/**
  */
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.gelin.hotel.entity.User;
+import com.gelin.hotel.entity.HotelUser;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 〈〉
@@ -13,5 +14,8 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2018/11/27
  */
 @Mapper
-public interface UserMapper extends BaseMapper<User>{
+public interface UserMapper extends BaseMapper<HotelUser>{
+
+    HotelUser getByUsername(@Param("username")String username);
+
 }

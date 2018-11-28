@@ -2,9 +2,9 @@ package com.gelin.hotel.config;/**
  * Created by vetech on 2018/11/27.
  */
 
+import com.baomidou.kisso.web.interceptor.SSOSpringInterceptor;
 import com.gelin.hotel.common.WebConstant;
 import com.gelin.hotel.interceptor.AuthenticationInterceptor;
-import com.gelin.hotel.interceptor.SSOSpringInterceptor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -45,14 +45,14 @@ public class WebConfig extends WebMvcConfigurationSupport {
 
     @Override
     protected void addViewControllers(ViewControllerRegistry registry) {
-//        registry.addViewController("/").setViewName("forward:" + webConstant.getWebLoginSuccessUri());
+        registry.addViewController("/").setViewName("forward:" + webConstant.getWebLoginSuccessUri());
         registry.addViewController("/login").setViewName("login");
     }
 
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {
         String[] e = StringUtils.trimToEmpty(webConstant.getIgnorUriStr()).split(",");
-        Set<String> pset = new TreeSet<String>();
+        Set<String> pset = new TreeSet<>();
         pset.add("/login");
         for (String str : e) {
             if (StringUtils.isNotBlank(str)) {
@@ -61,8 +61,8 @@ public class WebConfig extends WebMvcConfigurationSupport {
         }
         String[] e2 = pset.toArray(new String[]{});
         // kisso 拦截器配置
-//        registry.addInterceptor(new SSOSpringInterceptor()).addPathPatterns("/**").excludePathPatterns(e2);
+        registry.addInterceptor(new SSOSpringInterceptor()).addPathPatterns("/**").excludePathPatterns(e2);
         //权限拦截器
-//        registry.addInterceptor(new AuthenticationInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(new AuthenticationInterceptor()).addPathPatterns("/**");
     }
 }
